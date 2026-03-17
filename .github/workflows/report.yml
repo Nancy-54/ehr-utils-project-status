@@ -9,6 +9,9 @@ jobs:
     name: report
     runs-on: ubuntu-latest
     steps:
+    - name: Check out repository
+        uses: actions/checkout@v4
+
     - name: Install typst
       run: |
         sudo snap install typst
@@ -19,7 +22,7 @@ jobs:
 
     - name: Get username and timestamp
       run: |
-        echo "USERNAME=${GITHUB_REPOSITORY_OWNER}" >> $GITHUB_ENV
+        echo "USERNAME=Nancy-54" >> $GITHUB_ENV
         TIMESTAMP=$(date +'%Y%m%d%H%M%S')
         echo "TIMESTAMP=$TIMESTAMP" >> $GITHUB_ENV
 
@@ -27,8 +30,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        python -m project_status --username=nancy-54
-        typst compile outputs/nancy-54.typ outputs/ehr-utils-nancy-54_report_${{ env.TIMESTAMP }}.pdf
+        python -m project_status --username=Nancy-54
+        typst compile outputs/Nancy-54.typ outputs/ehr-utils-Nancy-54_report_${{ env.TIMESTAMP }}.pdf
 
     - name: Upload PDF report
       uses: actions/upload-artifact@v4
